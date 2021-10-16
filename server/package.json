@@ -1,0 +1,54 @@
+{
+	"name": "mevn-boilerplate-server",
+	"version": "0.1.0",
+	"private": true,
+	"main": "index.js",
+	"scripts": {
+		"start:prod": "npm run prod",
+		"start:dev": "nodemon",
+		"lint": "eslint '**/*.js'",
+		"dev": "set NODE_ENV=development && npm-run-all build server-dev --silent",
+		"prod": "set NODE_ENV=production && npm-run-all build --silent",
+		"server-dev": "node --inspect ./public",
+		"server-prod": "node ./public",
+		"build": "npm-run-all clean transpile",
+		"clean": "rimraf public",
+		"transpile": "babel ./src --out-dir public"
+	},
+	"nodemonConfig": {
+		"exec": "npm run dev",
+		"watch": [
+			"src/*",
+			"public/*"
+		],
+		"ignore": [
+			"**/__tests__/**",
+			"*.test.js",
+			"*.spec.js"
+		]
+	},
+	"babel": {
+		"presets": [
+			"@babel/preset-env"
+		]
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"dotenv": "^10.0.0",
+		"express": "^4.17.1",
+		"mongoose": "^6.0.5"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.15.4",
+		"@babel/core": "^7.15.5",
+		"@babel/preset-env": "^7.15.6",
+		"babel-polyfill": "^6.26.0",
+		"babel-eslint": "^10.1.0",
+		"eslint": "^7.32.0",
+		"eslint-plugin-prettier": "^4.0.0",
+		"nodemon": "^2.0.12",
+		"npm-run-all": "^4.1.5",
+		"rimraf": "^3.0.2"
+	}
+}
