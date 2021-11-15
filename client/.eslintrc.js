@@ -6,7 +6,6 @@ module.exports = {
 	extends: [
 		'plugin:vue/vue3-strongly-recommended',
 		'eslint:recommended',
-		'@vue/prettier',
 	],
 	parserOptions: {
 		parser: 'babel-eslint',
@@ -16,13 +15,5 @@ module.exports = {
 		'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
 		indent: ['error', 'tab'],
 		'max-len': 'off',
-		'prettier/prettier': [
-			'error',
-			{
-				printWidth: 80,
-				singleQuote: true,
-				useTabs: true,
-			},
-		],
 	},
 };
