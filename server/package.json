@@ -1,5 +1,5 @@
 {
-	"name": "mevn-boilerplate-server",
+	"name": "order-pay-eat-server",
 	"version": "0.1.0",
 	"private": true,
 	"main": "index.js",
@@ -9,7 +9,7 @@
 		"lint": "eslint '**/*.js'",
 		"dev": "set NODE_ENV=development && npm-run-all build server-dev --silent",
 		"prod": "set NODE_ENV=production && npm-run-all build --silent",
-		"server-dev": "node --inspect ./public",
+		"server-dev": "node --inspect ./dist",
 		"server-prod": "node ./public",
 		"build": "npm-run-all clean transpile",
 		"clean": "rimraf public",
@@ -18,8 +18,7 @@
 	"nodemonConfig": {
 		"exec": "npm run dev",
 		"watch": [
-			"src/*",
-			"public/*"
+			"src/*"
 		],
 		"ignore": [
 			"**/__tests__/**",
@@ -35,9 +34,13 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"bcryptjs": "^2.4.3",
+		"body-parser": "^1.19.0",
+		"cookie-parser": "^1.4.5",
+		"cors": "^2.8.5",
 		"dotenv": "^10.0.0",
-		"eslint-plugin-prettier": "^4.0.0",
 		"express": "^4.17.1",
+		"jsonwebtoken": "^8.5.1",
 		"mongoose": "^6.0.5"
 	},
 	"devDependencies": {

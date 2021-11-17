@@ -5,20 +5,12 @@ module.exports = {
 		node: true,
 	},
 	extends: ['eslint:recommended'],
-	plugins: ['eslint-plugin-prettier'],
+	plugins: [],
 	parser: 'babel-eslint',
 	rules: {
 		'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
 		'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
 		indent: ['error', 'tab'],
 		'max-len': 'off',
-		'prettier/prettier': [
-			'error',
-			{
-				printWidth: 80,
-				singleQuote: true,
-				useTabs: true,
-			},
-		],
 	},
 };

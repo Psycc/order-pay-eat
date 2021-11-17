@@ -1,25 +1,43 @@
-GET http://localhost:3000/subscribers
+@baseUrl = http://localhost:3000
 
-###
-GET http://localhost:3000/subscribers/61407f970afb6098529514e1
-
-###
-POST http://localhost:3000/subscribers
+# @name register
+POST {{baseUrl}}/auth/register
 Content-Type: application/json
 
 {
-	"name": "Lucy Who",
-	"subscribedToChannel": "Web dev Simplified"
+	"username": "admin",
+	"password": "admin",
+	"first_name": "Max",
+	"last_name": "Power"
 }
 
 ###
-###
-PATCH http://localhost:3000/subscribers/61407f970afb6098529514e1
+
+# @name login
+POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
 {
-	"name": "Lucy Who?"
+	"username": "admin",
+	"password": "admin"
 }
 
 ###
-DELETE http://localhost:3000/subscribers/61407f970afb6098529514e1
+
+@authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzcxNzE3NjUsImV4cCI6MTYzNzE3MjA2NX0.S7TzJnNsL_mVCaq3lfTcHtfV7WN5bBimNik1k5Ji1rk'
+
+# @name logout
+POST {{baseUrl}}/auth/logout
+Authorization: Bearer {{authToken}}
+
+
+###
+
+# @name reset
+POST {{baseUrl}}/auth/reset/
+Content-Type: application/json
+
+{
+	"username": "admin",
+}
+
