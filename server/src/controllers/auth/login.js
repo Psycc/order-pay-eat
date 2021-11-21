@@ -12,9 +12,8 @@ module.exports = async (req, res) => {
 	const user = await User.findOne({ username }).lean();
 
 	if (!user) {
-		return res.send({
-			ok: false,
-			err: 'USER_NOT_EXISTS',
+		return res.status(401).json({
+			message: 'USER_NOT_EXISTS',
 		});
 	}
 	const { _id, token_version } = user;
@@ -23,9 +22,8 @@ module.exports = async (req, res) => {
 	try {
 		const validPass = await bcrypt.compare(password, user.password);
 		if (!validPass) {
-			return res.send({
-				ok: false,
-				err: 'INVALID_PASSWORD',
+			return res.status(401).json({
+				message: 'INVALID_PASSWORD',
 			});
 		}
 
@@ -41,8 +39,7 @@ module.exports = async (req, res) => {
 				path: req.baseUrl,
 			}
 		);
-		return res.send({
-			ok: true,
+		return res.status(200).json({
 			access_token: createAccessToken({
 				_id,
 			}),
