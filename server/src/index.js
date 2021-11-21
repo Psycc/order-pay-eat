@@ -6,7 +6,8 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
 
-import auth from './routes/auth';
+import auth from './routes/auth/index';
+import api from './routes/api/index';
 
 const port = process.env.PORT;
 const whitelist = [
@@ -39,5 +40,6 @@ db.on('error', (error) => console.error(error));
 db.once('open', () => console.log('Connected to Database'));
 
 app.use('/auth', auth);
+app.use('/api', api);
 
 app.listen(port, () => console.log('Server listening on port '+ port));

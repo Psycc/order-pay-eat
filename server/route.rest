@@ -33,4 +33,10 @@ Authorization: Bearer {{authToken}}
 POST {{baseUrl}}/auth/refresh/
 Authorization: Bearer {{authToken}}
 
+### 
+# @name getAllProducts
+GET {{baseUrl}}/api/products/
 
+###
+# @name getOneProducts
+GET {{baseUrl}}/api/products/61999b1b6e13c8d4dba03c46
