@@ -4,7 +4,7 @@ const router = express.Router();
 import isLoggedIn from '../../middleware/isLoggedIn';
 import Product from '../../models/product';
 
-router.get('/products', async (req, res) => {
+router.get('/', async (req, res) => {
 	try {
 		const products = await Product.find().lean();
 		return res.status(200).json(products);
@@ -13,7 +13,7 @@ router.get('/products', async (req, res) => {
 	}
 });
 
-router.get('/products/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
 	const _id = req.params.id;
 	try {
 		const product = await Product.findOne({ _id }).lean();
@@ -26,7 +26,7 @@ router.get('/products/:id', async (req, res) => {
 // auth required
 router.use(isLoggedIn);
 
-router.post('/products', async (req, res) => {
+router.post('/', async (req, res) => {
 	const product = new Product({
 		name: req.body.name,
 		price: req.body.price,
@@ -41,14 +41,13 @@ router.post('/products', async (req, res) => {
 
 });
 
-router.patch('/products/:id', async(req, res) => {
+router.patch('/:id', async(req, res) => {
 	const _id = req.params.id;
 	const product = await Product.findOne({ _id });
 
-	console.log(req.body);
-	product.name = req.body.name;
-	product.price = req.body.price;
-	product.description = req.body.description;
+	if('name' in req.body) product.name = req.body.name;
+	if('price' in req.body) product.price = req.body.price;
+	if('description' in req.body) product.description = req.body.description;
 
 	try {
 		const newProduct = await product.save();
@@ -58,7 +57,7 @@ router.patch('/products/:id', async(req, res) => {
 	}
 });
 
-router.delete('/products/:id', async(req, res) => {
+router.delete('/:id', async(req, res) => {
 	const _id = req.params.id;
 	try {
 		await Product.deleteOne({ _id });
